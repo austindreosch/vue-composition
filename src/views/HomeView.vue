@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h3>{{ counterTitle }}</h3>
     <div>
       <button @click="decreaseCounter" class="btn">-</button>
       <span class="counter">{{counter}}</span>
@@ -8,24 +9,18 @@
   </div>
 </template>
 
-<script>
-  export default {
-    data(){
-      return {
-        counter: 0
-      }
-    },
-    methods: {
-      increaseCounter(){
-        this.counter++;
-      },
-      decreaseCounter(){
-        this.counter--;
-      }
-    }
-
+<script setup>
+  import { ref } from 'vue'
+  const counter = ref(0);
+  const counterTitle = ref('Super Counter');
+  const increaseCounter = () => {
+    counter.value++;
+  }
+  const decreaseCounter = () => {
+    counter.value--;
   }
 </script>
+
 
 <style>
   .home {
