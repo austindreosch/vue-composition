@@ -13,7 +13,7 @@
 
     <div class="edit mt-5">
       <h4 class="m-1">Edit Counter Title:</h4>
-      <input v-model="counterData.title" class="bg-gray-200 border border-black text-darkgray rounded p-1" type="text" >
+      <input v-model="counterData.title" class="bg-gray-200 border border-black text-darkgray rounded p-1" type="text" v-autofocus="">
     </div>
 
   </div>
@@ -21,22 +21,43 @@
 
 
 
-<script setup> // src/views/HomeView.vue
+<script setup> 
 
-import { computed, reactive, ref } from 'vue'
+import { computed, onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onMounted, onUnmounted, onUpdated, reactive, ref, watch } from 'vue'
+import {vAutofocus} from '@/directives/vAutofocus';
+
+/* -----------------------------------------------------------
+  *!    APP TITLE
+----------------------------------------------------------- */
+
 
 const appTitle = "My Amazing Counter App";
+
+onMounted(() => {
+  console.log('Do stuff related to the App Title');
+});
+
+
+/* -----------------------------------------------------------
+  *!    COUNTER
+----------------------------------------------------------- */
 
 const counterData = reactive({
   count: 0,
   title: 'Super Counter'
 });
 
+watch(() => counterData.count, (newCount, oldCount) => {
+  // console.log(`Count changed from ${oldCount} to ${newCount}.`);
+  if (newCount == 20) {
+    alert('Counter is now 20!');
+  }
+});
+
 const oddOrEven = computed(() => {
   if(counterData.count % 2 === 0) return 'even';
   return 'odd';
 });
-
 
 const increaseCounter = (amount, event) => {
   // console.log(event);
@@ -45,6 +66,21 @@ const increaseCounter = (amount, event) => {
 const decreaseCounter = amount => {
   counterData.count -= amount;;
 }
+
+onMounted(() => {
+  console.log('Do stuff related to the counter');
+});
+
+/* -----------------------------------------------------------
+  *!    DIRECTIVES
+----------------------------------------------------------- */
+
+// const vAutofocus = {
+//   mounted(el) {
+//     el.focus();
+//   }
+// }
+
 
 </script>
 
