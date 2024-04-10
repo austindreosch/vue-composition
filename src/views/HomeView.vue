@@ -24,12 +24,12 @@
 <script setup> 
 
 import { computed, onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onMounted, onUnmounted, onUpdated, reactive, ref, watch } from 'vue'
+
 import {vAutofocus} from '@/directives/vAutofocus';
 
 /* -----------------------------------------------------------
   *!    APP TITLE
 ----------------------------------------------------------- */
-
 
 const appTitle = "My Amazing Counter App";
 
@@ -48,7 +48,6 @@ const counterData = reactive({
 });
 
 watch(() => counterData.count, (newCount, oldCount) => {
-  // console.log(`Count changed from ${oldCount} to ${newCount}.`);
   if (newCount == 20) {
     alert('Counter is now 20!');
   }
@@ -60,7 +59,6 @@ const oddOrEven = computed(() => {
 });
 
 const increaseCounter = (amount, event) => {
-  // console.log(event);
   counterData.count += amount;
 }
 const decreaseCounter = amount => {
@@ -71,18 +69,10 @@ onMounted(() => {
   console.log('Do stuff related to the counter');
 });
 
-/* -----------------------------------------------------------
-  *!    DIRECTIVES
------------------------------------------------------------ */
-
-// const vAutofocus = {
-//   mounted(el) {
-//     el.focus();
-//   }
-// }
-
 
 </script>
+
+
 
 
 <style>
