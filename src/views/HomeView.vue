@@ -23,7 +23,7 @@
 
 <script setup> 
 
-import { computed, onActivated, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onDeactivated, onMounted, onUnmounted, onUpdated, reactive, ref, watch } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 
 import {vAutofocus} from '@/directives/vAutofocus';
 
@@ -47,18 +47,12 @@ const counterData = reactive({
   title: 'Super Counter'
 });
 
-watch(() => counterData.count, (newCount, oldCount) => {
-  if (newCount == 20) {
-    alert('Counter is now 20!');
-  }
-});
-
 const oddOrEven = computed(() => {
   if(counterData.count % 2 === 0) return 'even';
   return 'odd';
 });
 
-const increaseCounter = (amount, event) => {
+const increaseCounter = (amount) => {
   counterData.count += amount;
 }
 const decreaseCounter = amount => {
@@ -69,6 +63,14 @@ onMounted(() => {
   console.log('Do stuff related to the counter');
 });
 
+watch(() => counterData.count, (newCount, oldCount) => {
+  if (newCount == 20) {
+    alert('Counter is now 20!');
+  } else {
+    const direction = newCount > oldCount ? 'increased' : 'decreased';
+    console.log(`Count has ${direction} from ${oldCount} to ${newCount}`)
+  }
+});
 
 </script>
 
